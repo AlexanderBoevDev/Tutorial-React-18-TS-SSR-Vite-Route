@@ -1,21 +1,25 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
-  userId: 0
+  selectedAuthor: 0,
+  sort: {
+    name: 'Sort title asc',
+    sortProperty: 'title',
+  }
 }
 
 const filterSlice = createSlice ({
   name: 'filters',
   initialState,
   reducers: {
-    setUserId(state, action) {
-      console.log(action)
-      state.userId = action.payload
+    setSelectedAuthor(state, action) {
+      state.selectedAuthor = action.payload
+    },
+    setSort(state, action) {
+      state.sort = action.payload
     }
   }
 })
 
-export const {
-  setUserId
-} = filterSlice.actions
+export const { setSelectedAuthor, setSort } = filterSlice.actions
 export default filterSlice.reducer

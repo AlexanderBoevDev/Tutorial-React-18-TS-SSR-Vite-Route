@@ -15,8 +15,6 @@ export const UserFilterLayout = ({ value, onChangeAuthor }) => {
     })
   }, [])
 
-  const usersObj = itemsUsers.map(obj => (obj))
-
   return (
     <Dropdown
       value={ itemsUsers[value] }

@@ -1,52 +1,47 @@
-import React, {useState} from 'react'
+import React from 'react'
 
 import { useDispatch, useSelector } from 'react-redux'
-import { setUserId } from "../redux/slice/FilterSlice";
+import { setSelectedAuthor } from "../redux/slice/FilterSlice";
 
 import { SearchLayout } from '../layouts/SearchLayout'
 import { UserFilterLayout } from '../layouts/UserFilterLayout'
 import { SortPostLayout } from '../layouts/SortPostLayout'
 
-import { PostItemLayout } from '../layouts/PostItemLayout'
+import { PostItemListLayout } from '../layouts/PostItemListLayout'
+import { PostItemGridLayout } from '../layouts/PostItemGridLayout'
+
 import { PaginationComponent } from '../components/PaginationComponent'
 
 import '../scss/Posts.scss'
 
 export const PostsPage = () => {
 
-  // const dispatch = useDispatch()
-  // // @ts-ignore
-  // const userId = useSelector(state => state.FilterSlice.userId)
-  //
-  // const onChangeUser = (id) => {
-  //   console.log(setUserId(id))
-  // }
-
+  const dispatch = useDispatch()
+  // @ts-ignore
+  const {selectedAuthor, sort} = useSelector(state => state.filter)
+  const onChangeAuthor = (id) => {
+    dispatch(setSelectedAuthor(id))
+  }
   const [searchValue, setSearchValue] = React.useState('')
-  const [itemsPosts, setItemsPosts] = React.useState([])
-  const [selectedAuthor, setSelectedAuthor] = useState(0)
-  const [sortContent, setSortContent] = useState({
-    name: 'Sort title asc',
-    sort:'title',
-    order: 'asc'
-  })
+  const sortBy = sort.sortProperty.replace('-','')
+  const order = sort.sortProperty.includes('-') ? 'asc' : 'desc'
   const [paginationPage, setPaginationPage] = React.useState(0)
+  const [itemsPosts, setItemsPosts] = React.useState([])
+  const posts = itemsPosts.map( obj => <PostItemGridLayout key={obj.id} { ...obj } /> )
+  // const postsList = itemsPosts.map( obj => <PostItemListLayout key={obj.id} { ...obj } /> )
+  // const postsGrid = itemsPosts.map( obj => <PostItemGridLayout key={obj.id} { ...obj } /> )
   const search = searchValue ? `&q=${searchValue}` : ''
   const filtersAuthor = selectedAuthor > 0 ? `&userId=${selectedAuthor}`: ''
-  const sortBy = sortContent.sort
-  const sortOrder = sortContent.order
 
   React.useEffect(() => {
-    fetch(`http://localhost:4301/posts?_limit=8&_page=${paginationPage}${filtersAuthor}&_sort=${sortBy}&_order=${sortOrder}${search}`)
+    fetch(`http://localhost:4301/posts?_limit=8&_page=${paginationPage}${filtersAuthor}&_sort=${sortBy}&_order=${order}${search}`)
     .then((response) => { return response.json() })
     .then((json) => {
       setTimeout(() => {
         setItemsPosts(json)
       },10)
     })
-  }, [selectedAuthor, sortContent, paginationPage, searchValue])
-
-  const posts = itemsPosts.map( obj => <PostItemLayout key={obj.id} { ...obj } /> )
+  }, [searchValue, selectedAuthor, sort.sortProperty, paginationPage])
 
   return (
     <div className="container-fluid container-xxl">
@@ -57,10 +52,10 @@ export const PostsPage = () => {
             <SearchLayout searchValue={searchValue} setSearchValue={setSearchValue}/>
           </div>
           <div className="col-12 col-md-auto mb-3 mb-md-0">
-            <UserFilterLayout value={selectedAuthor} onChangeAuthor={(id) => setSelectedAuthor(id)}/>
+            <UserFilterLayout value={selectedAuthor} onChangeAuthor={onChangeAuthor}/>
           </div>
           <div className="col-12 col-md-auto mb-3 mb-md-0">
-            <SortPostLayout value={sortContent} onChangeSort={(sort) => setSortContent(sort)}/>
+            <SortPostLayout/>
           </div>
         </div>
       </div>
