@@ -1,24 +1,30 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { useSelector, useDispatch } from 'react-redux'
+import { setSort } from '../redux/slice/FilterSlice'
 import { Dropdown } from 'primereact/dropdown'
 
-export const SortPostLayout = ({ value, onChangeSort }) => {
+const list = [
+  { name: 'Sort title desc', sortProperty: 'title' },
+  { name: 'Sort title asc', sortProperty: '-title' },
+  { name: 'Sort content id desc', sortProperty: 'id' },
+  { name: 'Sort content id asc', sortProperty: '-id'},
+  { name: 'Sort author desc', sortProperty: 'userId' },
+  { name: 'Sort author asc', sortProperty: '-userId' },
+];
 
-  const sort = [
-    { name: 'Sort title asc', sort:'title', order: 'asc' },
-    { name: 'Sort title desc', sort:'title', order: 'desc' },
-    { name: 'Sort content id asc', sort:'id', order: 'asc' },
-    { name: 'Sort content id desc', sort:'id', order: 'desc' },
-    { name: 'Sort author asc', sort:'userId', order: 'asc' },
-    { name: 'Sort author desc', sort:'userId', order: 'desc' },
-  ]
+export const SortPostLayout = () => {
+  const dispatch = useDispatch()
+  // @ts-ignore
+  const sort = useSelector(state => state.filter.sort)
 
   return (
     <Dropdown
-      value={ value.name }
-      onChange={(e) => onChangeSort(e.value)}
-      options={ sort }
+      value={sort}
+      onChange={(e) => dispatch(setSort(e.value))}
+      options={list}
       optionLabel="name"
       placeholder="Sort by"
-      className="w-full md:w-14rem" />
+      className="w-full md:w-14rem"
+    />
   )
 }

@@ -2,11 +2,25 @@
 	height: 100%;
 	display: flex;
 	.p-card-title {
-		-webkit-box-orient: vertical;
-		text-decoration: blink;
-		-webkit-line-clamp: 1;
-		height: auto;
+		font-size: 18px;
+		font-weight: 700;
+		text-transform: uppercase;
+		-webkit-line-clamp: 2;
 		display: -webkit-box;
+		-webkit-box-orient: vertical;
+		white-space: normal;
+		height: auto;
 		overflow: hidden;
+		margin: 0;
+	}
+	&__list {
+		.p-card-header {
+			width: 320px;
+			min-width: 320px;
+			img {
+				height: 100%;
+			}
+		}
+		flex-direction: column;
 	}
 }
