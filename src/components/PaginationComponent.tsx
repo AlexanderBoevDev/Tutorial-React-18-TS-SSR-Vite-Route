@@ -3,8 +3,6 @@ import { Paginator } from 'primereact/paginator'
 
 export const PaginationComponent = ({ currentPage, onChangePage }) => {
 
-	console.log(currentPage)
-
 	const [first, setFirst] = React.useState(0)
 	const [rows, setRows] = React.useState(8)
 

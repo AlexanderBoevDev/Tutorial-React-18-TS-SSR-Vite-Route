@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { setSort } from '../redux/slice/FilterSlice'
 import { Dropdown } from 'primereact/dropdown'
 
-const list = [
+export const sortList = [
   { name: 'Sort title desc', sortProperty: 'title' },
   { name: 'Sort title asc', sortProperty: '-title' },
   { name: 'Sort content id desc', sortProperty: 'id' },
@@ -21,7 +21,7 @@ export const SortPostLayout = () => {
     <Dropdown
       value={sort}
       onChange={(e) => dispatch(setSort(e.value))}
-      options={list}
+      options={sortList}
       optionLabel="name"
       placeholder="Sort by"
       className="w-full md:w-14rem"
