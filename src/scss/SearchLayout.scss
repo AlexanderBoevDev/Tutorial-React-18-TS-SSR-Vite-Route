@@ -1,0 +1,9 @@
+.pi-search {
+	width: 1rem;
+}
+.pi-search-clear {
+	cursor: pointer;
+	&:hover,&:active,&:focus {
+		color: #6366F1!important;
+	}
+}

@@ -1,11 +1,9 @@
-import { NavLink } from 'react-router-dom'
-
-import '../scss/app.scss'
-
 export const AboutPage = () => {
   return (
     <>
-      <h1>About Page</h1>
+      <div className="container-fluid container-xxl">
+        <h1 className="mb-4">About Page</h1>
+      </div>
     </>
   )
 }

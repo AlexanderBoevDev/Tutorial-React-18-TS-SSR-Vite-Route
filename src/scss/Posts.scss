@@ -1,0 +1,12 @@
+.card--post {
+	height: 100%;
+	display: flex;
+	.p-card-title {
+		-webkit-box-orient: vertical;
+		text-decoration: blink;
+		-webkit-line-clamp: 1;
+		height: auto;
+		display: -webkit-box;
+		overflow: hidden;
+	}
+}

@@ -1,13 +1,13 @@
 import React from 'react'
 import { Outlet } from 'react-router-dom'
 
+import '../scss/MainComponent.scss'
+
 export const MainComponent = () => {
 	return (
 		<>
 			<main>
-				<div className="container">
-					<Outlet />
-				</div>
+				<Outlet />
 			</main>
 		</>
 	)

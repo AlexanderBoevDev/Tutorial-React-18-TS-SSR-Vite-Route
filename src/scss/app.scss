@@ -1,4 +1,26 @@
+@import "node_modules/bootstrap/scss/functions";
+@import "node_modules/bootstrap/scss/variables";
+@import "node_modules/bootstrap/scss/mixins";
+
 body {
 	font-family: 'Nunito', 'Roboto', sans-serif;
 	margin: 0;
+	.page {
+		a {
+			transition: .3s ease-out;
+		}
+	}
+}
+
+.filter-content {
+	.p-input-search {
+		display: flex;
+	}
+	.p-dropdown,
+	input {
+		width: 100%;
+		@include media-breakpoint-up(lg) {
+			width: auto;
+		}
+	}
 }

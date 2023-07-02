@@ -1,0 +1,58 @@
+header {
+	background: var(--gray-100);
+	position: relative;
+	z-index: 5;
+	.p-megamenu,
+	.p-menubar {
+		padding: 1rem 0;
+		border: none;
+		border-radius: 0;
+		background: transparent;
+		.p-megamenu-start,
+		.p-menubar-start {
+			margin-right: auto;
+		}
+		.p-megamenu-root-list,
+		.p-menubar-root-list {
+			.p-menuitem, {
+				margin-left: .5rem;
+				.p-menuitem-link {
+					&:active,&:focus,&:hover {
+						background: transparent!important;
+						box-shadow: none!important;
+						.p-menuitem-text {
+							color: var(--blue-600)!important;
+						}
+					}
+				}
+				.p-submenu-list {
+					.p-menuitem {
+						margin-left: 0;
+					}
+				}
+				&--user {
+					>.p-menuitem-link {
+						color: var(--primary-color-text);
+						background: var(--highlight-text-color);
+						.p-menuitem-icon,
+						.p-menuitem-text,
+						.p-submenu-icon {
+							color: var(--primary-color-text);
+						}
+						&:active,&:focus,&:hover {
+							background: var(--text-color-secondary)!important;
+							.p-menuitem-icon,
+							.p-menuitem-text,
+							.p-submenu-icon {
+								color: var(--primary-color-text)!important;
+							}
+						}
+					}
+				}
+			}
+			.p-menuitem-active > .p-menuitem-link {
+				background: transparent;
+			}
+		}
+	}
+}

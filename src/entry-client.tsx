@@ -1,11 +1,16 @@
 import ReactDOM from 'react-dom/client'
 import { BrowserRouter } from 'react-router-dom'
+import { Provider } from 'react-redux';
 
 import { Router } from './router'
+
+import { store } from './redux/store';
 
 ReactDOM.hydrateRoot(
   document.querySelector('#root') as HTMLElement,
   <BrowserRouter>
-    <Router />
+    <Provider store={ store }>
+      <Router />
+    </Provider>
   </BrowserRouter>
 )
