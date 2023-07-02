@@ -1,18 +1,17 @@
 import React from 'react';
 import { Dropdown } from 'primereact/dropdown'
+import axios from "axios";
 
 export const UserFilterLayout = ({ value, onChangeAuthor }) => {
 
   const [itemsUsers, setItemsUsers] = React.useState([])
 
   React.useEffect(() => {
-    fetch(`http://localhost:4301/users`)
-    .then((response) => { return response.json() })
-    .then((json) => {
-      setTimeout(() => {
-        setItemsUsers(json)
-      })
-    })
+    axios.get(`http://localhost:4301/users`)
+    .then(resolve => {
+      setItemsUsers(resolve.data)
+      }
+    )
   }, [])
 
   return (
