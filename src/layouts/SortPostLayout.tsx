@@ -4,12 +4,12 @@ import { setSort } from '../redux/slice/FilterSlice'
 import { Dropdown } from 'primereact/dropdown'
 
 const list = [
-  { name: 'Sort title desc', sortProperty: 'title' },
-  { name: 'Sort title asc', sortProperty: '-title' },
-  { name: 'Sort content id desc', sortProperty: 'id' },
   { name: 'Sort content id asc', sortProperty: '-id'},
-  { name: 'Sort author desc', sortProperty: 'userId' },
+  { name: 'Sort content id desc', sortProperty: 'id' },
+  { name: 'Sort title asc', sortProperty: '-title' },
+  { name: 'Sort title desc', sortProperty: 'title' },
   { name: 'Sort author asc', sortProperty: '-userId' },
+  { name: 'Sort author desc', sortProperty: 'userId' },
 ];
 
 export const SortPostLayout = () => {
