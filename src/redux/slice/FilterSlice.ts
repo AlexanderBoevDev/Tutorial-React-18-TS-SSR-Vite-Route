@@ -4,8 +4,8 @@ const initialState = {
   selectedAuthor: 0,
   currentPage: 1,
   sort: {
-    name: 'Sort title asc',
-    sortProperty: 'title',
+    name: 'Sort content id asc',
+    sortProperty: '-id',
   }
 }
 

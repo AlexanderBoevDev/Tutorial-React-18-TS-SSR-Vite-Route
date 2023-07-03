@@ -1,9 +1,7 @@
 import React from 'react'
 import { Paginator } from 'primereact/paginator'
 
-export const PaginationComponent = ({ currentPage, onChangePage }) => {
-
-	console.log(currentPage)
+export const PaginationComponent = ({ currentPage, onChangePage, itemsPostsCount }) => {
 
 	const [first, setFirst] = React.useState(0)
 	const [rows, setRows] = React.useState(8)
@@ -19,7 +17,7 @@ export const PaginationComponent = ({ currentPage, onChangePage }) => {
 			<Paginator
 				first={first}
 				rows={rows}
-				totalRecords={100}
+				totalRecords={itemsPostsCount}
 				onPageChange={onPageChange}
 				// rowsPerPageOptions={[8,12,20]}
 			/>

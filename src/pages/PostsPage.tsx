@@ -30,6 +30,7 @@ export const PostsPage = () => {
   const sortBy = sort.sortProperty.replace('-','')
   const order = sort.sortProperty.includes('-') ? 'asc' : 'desc'
   const [itemsPosts, setItemsPosts] = React.useState([])
+  const [itemsPostsCount, setItemsPostsCount] = React.useState([])
   const posts = itemsPosts.map( obj => <PostItemGridLayout key={obj.id} { ...obj } /> )
   const search = searchValue ? `&q=${searchValue}` : ''
   const filtersAuthor = selectedAuthor > 0 ? `&userId=${selectedAuthor}`: ''
@@ -41,6 +42,8 @@ export const PostsPage = () => {
         //   setItemsPosts(resolve.data)
         // },1500)
         setItemsPosts(resolve.data)
+        // @ts-ignore
+        setItemsPostsCount(resolve.headers.get('X-Total-Count'))
       }
     )
     window.scrollTo(0,0)
@@ -66,7 +69,7 @@ export const PostsPage = () => {
         { posts }
       </div>
       <div className="row">
-        <PaginationComponent currentPage={currentPage} onChangePage={onChangePage} />
+        <PaginationComponent currentPage={currentPage} onChangePage={onChangePage} itemsPostsCount={itemsPostsCount} />
       </div>
     </div>
   )
