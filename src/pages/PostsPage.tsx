@@ -1,53 +1,55 @@
 import React from 'react'
 import axios from 'axios'
-
 import { useDispatch, useSelector } from 'react-redux'
-import { setSelectedAuthor, setCurrentPage } from "../redux/slice/FilterSlice";
-
+import { setSearchValue, setSelectedAuthor, setCurrentPage } from "../redux/slice/FilterSlice";
 import { SearchLayout } from '../layouts/SearchLayout'
 import { UserFilterLayout } from '../layouts/UserFilterLayout'
 import { SortPostLayout } from '../layouts/SortPostLayout'
-
 import { PostItemListLayout } from '../layouts/PostItemListLayout'
 import { PostItemGridLayout } from '../layouts/PostItemGridLayout'
-
 import { PaginationComponent } from '../components/PaginationComponent'
-
 import '../scss/Posts.scss'
+import { fetchPosts } from "../redux/slice/PostsSlice";
 
 export const PostsPage = () => {
-
   const dispatch = useDispatch()
   // @ts-ignore
-  const { selectedAuthor, sort, currentPage } = useSelector(state => state.filter)
-  const onChangeAuthor = (id) => {
-    dispatch(setSelectedAuthor(id))
+  const itemsPosts = useSelector(state => state.posts.items)
+  // @ts-ignore
+  const itemsPostsStatus = useSelector(state => state.posts.status)
+  // @ts-ignore
+  const itemCount = useSelector(state => state.posts.itemsCount)
+  // @ts-ignore
+  const { searchValue, selectedAuthor, sort, currentPage } = useSelector(state => state.filter)
+
+  const onChangeAuthor = (id) => { dispatch(setSelectedAuthor(id)) }
+  const onChangePage = number => { dispatch(setCurrentPage(number)) }
+
+  const getPosts = async () => {
+
+    const search = searchValue ? `&q=${searchValue}` : ''
+    const filtersAuthor = selectedAuthor > 0 ? `&userId=${selectedAuthor}`: ''
+    const sortBy = sort.sortProperty.replace('-','')
+    const order = sort.sortProperty.includes('-') ? 'asc' : 'desc'
+
+    // @ts-ignore
+    dispatch(fetchPosts({
+      currentPage,
+      filtersAuthor,
+      sortBy,
+      order,
+      search,
+      }),
+    );
+
+    window.scrollTo(0, 0);
   }
-  const onChangePage = number => {
-    dispatch(setCurrentPage(number))
-  }
-  const [searchValue, setSearchValue] = React.useState('')
-  const sortBy = sort.sortProperty.replace('-','')
-  const order = sort.sortProperty.includes('-') ? 'asc' : 'desc'
-  const [itemsPosts, setItemsPosts] = React.useState([])
-  const [itemsPostsCount, setItemsPostsCount] = React.useState([])
-  const posts = itemsPosts.map( obj => <PostItemGridLayout key={obj.id} { ...obj } /> )
-  const search = searchValue ? `&q=${searchValue}` : ''
-  const filtersAuthor = selectedAuthor > 0 ? `&userId=${selectedAuthor}`: ''
 
   React.useEffect(() => {
-    axios.get(`http://localhost:4301/posts?_limit=8&_page=${currentPage}${filtersAuthor}&_sort=${sortBy}&_order=${order}${search}`)
-      .then(resolve => {
-        // setTimeout(() => {
-        //   setItemsPosts(resolve.data)
-        // },1500)
-        setItemsPosts(resolve.data)
-        // @ts-ignore
-        setItemsPostsCount(resolve.headers.get('X-Total-Count'))
-      }
-    )
-    window.scrollTo(0,0)
+    getPosts()
   }, [searchValue, selectedAuthor, sort.sortProperty, currentPage])
+
+  const posts = itemsPosts.map( obj => <PostItemGridLayout key={obj.id} { ...obj } /> )
 
   return (
     <div className="container-fluid container-xxl">
@@ -65,12 +67,18 @@ export const PostsPage = () => {
           </div>
         </div>
       </div>
-      <div className="row">
-        { posts }
-      </div>
-      <div className="row">
-        <PaginationComponent currentPage={currentPage} onChangePage={onChangePage} itemsPostsCount={itemsPostsCount} />
-      </div>
+      { itemsPostsStatus === 'error' ? (
+        <div className="row justify-content-center">
+          <div className="col-md-auto px-3 py-5">
+            <h2> Something went wrong!</h2>
+          </div>
+        </div>
+      ) : (
+        <div className="row">
+          {posts}
+          <PaginationComponent onChangePage={onChangePage} itemsCount={itemCount} />
+        </div>
+      )}
     </div>
   )
 }
