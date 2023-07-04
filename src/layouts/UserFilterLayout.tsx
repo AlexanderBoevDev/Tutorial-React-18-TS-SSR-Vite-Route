@@ -8,7 +8,7 @@ export const UserFilterLayout = ({ value, onChangeAuthor }) => {
 
   React.useEffect(() => {
     axios.get(`http://localhost:4301/users`)
-    .then(resolve => {
+    .then((resolve) => {
       setItemsUsers(resolve.data)
       }
     )

@@ -1,16 +1,17 @@
 import React from 'react'
 import { InputText } from 'primereact/inputtext'
 import { useDebounce } from 'primereact/hooks'
+import { useDispatch } from 'react-redux'
 
 import '../scss/SearchLayout.scss'
 
-export const SearchLayout = ({searchValue, setSearchValue}) => {
-
+export const SearchLayout = ({ searchValue, setSearchValue }) => {
+  const dispatch = useDispatch();
   //const [inputValue, debouncedValue, setInputValue] = useDebounce('', 400);
 
   const inputRef = React.useRef()
   const onClickClear = () => {
-    setSearchValue('')
+    dispatch(setSearchValue(''))
     // @ts-ignore
     inputRef.current.focus()
   }
@@ -22,7 +23,7 @@ export const SearchLayout = ({searchValue, setSearchValue}) => {
         ref={inputRef}
         placeholder="Search for a post"
         value={ searchValue }
-        onChange={(e) => setSearchValue(e.target.value)}
+        onChange={(e) => dispatch(setSearchValue(e.target.value))}
       />
       { searchValue && (
         <i onClick={onClickClear} className="pi pi-times pi-search-clear" style={{ fontSize: '1rem' }}/>
