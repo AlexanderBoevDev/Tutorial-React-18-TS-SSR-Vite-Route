@@ -32,11 +32,11 @@ export const EditUserPage:React.FC = () => {
   }
   return (
     <div className="container-fluid container-xxl">
-      <h1 className="mb-4">Edit User Page</h1>
+      <h1 className="mb-4">Edit User {username}</h1>
       <div className="card p-fluid flex flex-wrap gap-3">
         <div className="flex-auto mb-3">
           <label htmlFor="name" className="font-bold block mb-2">Name</label>
-          <InputText id="name" onChange={(e) => onChange(e)} name="name" value={name} className="p-invalid" />
+          <InputText id="name" onChange={(e) => onChange(e)} name="name" value={name} />
         </div>
         <div className="flex-auto mb-3">
           <label htmlFor="username" className="font-bold block mb-2">Full name</label>

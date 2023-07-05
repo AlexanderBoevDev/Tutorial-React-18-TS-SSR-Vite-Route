@@ -51,6 +51,7 @@ export const HeaderComponent:React.FC = () => {
 				{
 					label: "Add post",
 					icon: "pi pi-fw pi-file",
+					command: () => { navigate("/add-post") },
 				},
 				{
 					separator: true
