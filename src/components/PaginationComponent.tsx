@@ -1,24 +1,25 @@
-import React from 'react'
-import { Paginator } from 'primereact/paginator'
+import React from "react";
+import { Paginator } from "primereact/paginator";
 
-export const PaginationComponent = ({ onChangePage,itemsCount }) => {
+// @ts-ignore
+export const PaginationComponent:React.FC = ({ onChangePage,itemsCount }) => {
 
-	const [first, setFirst] = React.useState(0)
-	const [rows, setRows] = React.useState(8)
+	const [first, setFirst] = React.useState(0);
+	const [rows, setRows] = React.useState(8);
 
 	const onPageChange = (event) => {
-		setFirst(event.first)
-		setRows(event.rows)
-		onChangePage(event.page + 1)
+		setFirst(event.first);
+		setRows(event.rows);
+		onChangePage(event.page + 1);
 	};
 
 	return (
 		<div className="col-12 my-3">
 			<Paginator
-				first={first}
-				rows={rows}
-				totalRecords={itemsCount}
-				onPageChange={onPageChange}
+				first={ first }
+				rows={ rows }
+				totalRecords={ itemsCount }
+				onPageChange={ onPageChange }
 			/>
 		</div>
 	)

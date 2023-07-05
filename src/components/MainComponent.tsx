@@ -1,14 +1,11 @@
-import React from 'react'
-import { Outlet } from 'react-router-dom'
+import React from "react";
+import { Outlet } from "react-router-dom";
+import "../scss/MainComponent.scss";
 
-import '../scss/MainComponent.scss'
-
-export const MainComponent = () => {
+export const MainComponent:React.FC = () => {
 	return (
-		<>
-			<main>
-				<Outlet />
-			</main>
-		</>
+		<main>
+			<Outlet />
+		</main>
 	)
 }

@@ -13,6 +13,17 @@
 		overflow: hidden;
 		margin: 0;
 	}
+	.p-card-body {
+		position: relative;
+	}
+	.p-card-footer {
+		.p-button {
+			text-align: center;
+			text-decoration: blink;
+			display: table;
+			width: 100%;
+		}
+	}
 	&__list {
 		.p-card-header {
 			width: 320px;

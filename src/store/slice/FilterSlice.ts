@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 const initialState = {
   searchValue: '',
@@ -18,16 +18,17 @@ const filterSlice = createSlice ({
       state.searchValue = action.payload;
     },
     setSelectedAuthor(state, action) {
-      state.selectedAuthor = action.payload
+      state.selectedAuthor = action.payload;
     },
     setSort(state, action) {
-      state.sort = action.payload
+      state.sort = action.payload;
     },
     setCurrentPage(state, action) {
-      state.currentPage = action.payload
+      state.currentPage = action.payload;
     }
   }
 })
 
-export const { setSearchValue, setSelectedAuthor, setSort, setCurrentPage } = filterSlice.actions
-export default filterSlice.reducer
+export const selectFilter = (state) => state.filter;
+export const { setSearchValue, setSelectedAuthor, setSort, setCurrentPage } = filterSlice.actions;
+export default filterSlice.reducer;

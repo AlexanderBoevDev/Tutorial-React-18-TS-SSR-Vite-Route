@@ -55,4 +55,28 @@ header {
 			}
 		}
 	}
+	.p-menubar-end {
+		.flag {
+			width: 1.5rem;
+			height: auto;
+		}
+		.p-dropdown-label {
+		
+		}
+	}
+}
+.p-dropdown-panel {
+	.p-dropdown-items {
+		padding: 0!important;
+	}
+	.p-dropdown-item {
+		.flex {
+			display: flex;
+			.flag {
+				width: 1.5rem;
+				height: auto;
+				margin-right: .5rem;
+			}
+		}
+	}
 }
