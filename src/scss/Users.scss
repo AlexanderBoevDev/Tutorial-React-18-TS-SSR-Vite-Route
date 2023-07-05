@@ -1,0 +1,12 @@
+.users--list-table {
+	.p-datatable-tbody {
+		tr {
+			td:last-child {
+				.flex {
+					display: flex;
+					justify-content: space-evenly;
+				}
+			}
+		}
+	}
+}
