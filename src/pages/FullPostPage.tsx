@@ -47,9 +47,12 @@ export const FullPostPage:React.FC = () => {
 				<div className="col-12">
 					<p>{ post.body }</p>
 				</div>
-				<div className="col-12">
-					<Link to="/posts">
-						<Button label="Back" />
+				<div className="col-12 my-3">
+					<Link to="/posts" className="p-button p-component me-3">
+						Back
+					</Link>
+					<Link to={`/posts/${post.id}/edit`} className="p-button p-component">
+						Edit
 					</Link>
 				</div>
 			</div>

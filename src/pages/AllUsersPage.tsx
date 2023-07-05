@@ -25,7 +25,7 @@ export const AllUsersPage:React.FC = () => {
   const actionTemplate = (user) => {
     return (
       <div className="flex flex-wrap gap-2">
-        <Link to={`../edit-user/${user.id}`} className="p-button p-component p-button-icon-only p-button-rounded"><span className="pi pi-user-edit"/></Link>
+        <Link to={`../users/${user.id}/edit`} className="p-button p-component p-button-icon-only p-button-rounded"><span className="pi pi-user-edit"/></Link>
         <Button type="button" onClick={() => deleteData(user.id)} icon="pi pi-trash" severity="danger" rounded />
       </div>
     );
