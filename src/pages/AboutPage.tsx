@@ -1,30 +1,29 @@
-import { useTranslation, Trans } from "react-i18next";
 import React from "react";
-
-const lngs = {
-  en: { nativeName: "English" },
-  ru: { nativeName: "Russian" }
-};
+import { Trans, useTranslation } from "react-i18next";
 
 export const AboutPage:React.FC = () => {
+
   const { t, i18n } = useTranslation();
+  const changeLanguage = (language) => {
+    i18n.changeLanguage(language);
+  };
+
   return (
     <div className="container-fluid container-xxl">
       <h1 className="mb-4">About Page</h1>
-      <Trans i18nKey="description.part1">
-        Edit <code>src/App.js</code> and save to reload.
+
+      <button onClick={() => changeLanguage("en")}>EN</button>
+      <button onClick={() => changeLanguage("ru")}>RU</button>
+
+      <hr/>
+
+      <Trans i18nKey="title">
+        Welcome to react using react-i18next
       </Trans>
-      <p>{t("description.part2")}</p>
-      {Object.keys(lngs).map((lng) => (
-        <button
-          key={lng}
-          style={{ fontWeight: i18n.resolvedLanguage === lng ? "bold" : "normal" }}
-          type="submit"
-          onClick={() => i18n.changeLanguage(lng)}
-        >
-          {lngs[lng].nativeName}
-        </button>
-      ))}
+      <div>
+        {t("description.body")}
+      </div>
+
     </div>
   )
 }
