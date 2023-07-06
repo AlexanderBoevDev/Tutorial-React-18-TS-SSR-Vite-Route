@@ -1,0 +1,6 @@
+{
+	"title": "Welcome to react using react-i18next",
+	"description": {
+		"body": "Switch language between english and german using buttons above."
+	}
+}
