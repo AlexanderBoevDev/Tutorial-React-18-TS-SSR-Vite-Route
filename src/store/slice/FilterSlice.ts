@@ -1,34 +1,47 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { RootState } from "../store";
 
-const initialState = {
-  searchValue: '',
+type Sort = {
+  name: string;
+  sortProperty: "id" | "title" | "userId" | "-id" | "-title" | "-userId";
+}
+
+export interface FilterSliceState {
+  searchValue: string;
+  selectedAuthor: number;
+  currentPage: number;
+  sort: Sort;
+}
+
+const initialState: FilterSliceState = {
+  searchValue: "",
   selectedAuthor: 0,
   currentPage: 1,
   sort: {
-    name: 'Sort content id asc',
-    sortProperty: '-id',
+    name: "Sort content id desc",
+    sortProperty: "id",
   }
 }
 
-const filterSlice = createSlice ({
-  name: 'filters',
+const filterPosts = createSlice ({
+  name: "filters",
   initialState,
   reducers: {
     setSearchValue(state, action: PayloadAction<string>) {
       state.searchValue = action.payload;
     },
-    setSelectedAuthor(state, action) {
+    setSelectedAuthor(state, action: PayloadAction<number>) {
       state.selectedAuthor = action.payload;
     },
-    setSort(state, action) {
+    setSort(state, action: PayloadAction<Sort>) {
       state.sort = action.payload;
     },
-    setCurrentPage(state, action) {
+    setCurrentPage(state, action: PayloadAction<number>) {
       state.currentPage = action.payload;
     }
   }
 })
 
-export const selectFilter = (state) => state.filter;
-export const { setSearchValue, setSelectedAuthor, setSort, setCurrentPage } = filterSlice.actions;
-export default filterSlice.reducer;
+export const selectFilter = (state:RootState) => state.filter;
+export const { setSearchValue, setSelectedAuthor, setSort, setCurrentPage } = filterPosts.actions;
+export default filterPosts.reducer;

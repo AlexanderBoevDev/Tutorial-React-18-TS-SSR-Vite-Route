@@ -23,13 +23,7 @@ export const PostsPage:React.FC = () => {
     const sortBy = sort.sortProperty.replace("-","");
     const order = sort.sortProperty.includes("-") ? "asc" : "desc";
     // @ts-ignore
-    dispatch(fetchPosts({
-      currentPage,
-      filtersAuthor,
-      sortBy,
-      order,
-      search
-    }));
+    dispatch(fetchPosts({ currentPage, filtersAuthor, sortBy, order, search }));
     window.scrollTo(0, 0);
   }
 

@@ -1,5 +1,4 @@
 .card--post {
-	height: 100%;
 	display: flex;
 	.p-card-title {
 		font-size: 18px;
@@ -12,9 +11,24 @@
 		height: auto;
 		overflow: hidden;
 		margin: 0;
+		min-height: 2.75rem;
 	}
 	.p-card-body {
 		position: relative;
+		.p-card-content {
+			height: 11rem;
+			p {
+				-webkit-line-clamp: 5;
+				display: -webkit-box;
+				-webkit-box-orient: vertical;
+				white-space: normal;
+				height: auto;
+				overflow: hidden;
+			}
+		}
+		.p-card-footer {
+			padding: 0;
+		}
 	}
 	.p-card-footer {
 		.p-button {

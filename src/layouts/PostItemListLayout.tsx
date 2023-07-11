@@ -1,7 +1,12 @@
 import React from "react";
 import { Card } from "primereact/card";
 
-export const PostItemListLayout:React.FC = ( props ) => {
+export const PostItemListLayout:React.FC<{
+		id: number;
+		userId: number;
+		title: string;
+		body: string;
+	}> = ( props ) => {
 	const header = (
 		<img
 			className="w-9 sm:w-16rem xl:w-10rem shadow-2 block xl:block mx-auto border-round"
@@ -12,20 +17,16 @@ export const PostItemListLayout:React.FC = ( props ) => {
 	return (
 		<div className="col-12 mb-4">
 			<div className="card card--post card--post__list">
-				{/*@ts-ignore*/}
 				<Card title={ props.title } header={ header } className="d-flex">
 					<div className="row m-0 mb-3">
 						<div className="col-md-auto ps-0">
-							{/*@ts-ignore*/}
 							<strong>Author</strong>: { props.userId }
 						</div>
 						<div className="col-md-auto pe-0">
-							{/*@ts-ignore*/}
 							<strong>Post</strong>: { props.id }
 						</div>
 					</div>
 					<p className="m-0">
-						{/*@ts-ignore*/}
 						{ props.body }
 					</p>
 				</Card>

@@ -5,7 +5,7 @@ import { Paginator } from "primereact/paginator";
 export const PaginationComponent:React.FC = ({ onChangePage,itemsCount }) => {
 
 	const [first, setFirst] = React.useState(0);
-	const [rows, setRows] = React.useState(8);
+	const [rows, setRows] = React.useState(12);
 
 	const onPageChange = (event) => {
 		setFirst(event.first);

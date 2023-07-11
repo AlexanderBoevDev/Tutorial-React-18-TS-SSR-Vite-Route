@@ -1,5 +1,4 @@
 import React from "react";
-import { Routes, Route } from "react-router-dom";
 import { NavLink, useNavigate } from "react-router-dom";
 import { Menubar } from "primereact/menubar";
 import "../scss/HeaderComponent.scss";

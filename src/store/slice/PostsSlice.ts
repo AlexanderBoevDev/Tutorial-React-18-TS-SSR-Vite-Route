@@ -1,27 +1,53 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import { RootState } from "../store";
 
-export const fetchPosts = createAsyncThunk(
-	'posts/fetchPostsItems', async (params) => {
-		// @ts-ignore
+export type FetchPostsArgs = {
+	currentPage: number;
+	filtersAuthor: number;
+	sortBy: string;
+	order: string;
+	search: string;
+};
+
+type Post = {
+	id: number;
+	userId: number;
+	title: string;
+	body: string;
+}
+
+export enum Status {
+	LOADING = "loading",
+	SUCCESS = "success",
+	ERROR = "error",
+}
+
+interface PostSliceState {
+	items: Post[],
+	status: Status;
+}
+
+export const fetchPosts = createAsyncThunk (
+	"posts/fetchPostsItems", async (params: FetchPostsArgs) => {
 		const { currentPage, filtersAuthor, sortBy, order, search } = params;
-		const { data, headers } = await axios.get(
-			`http://localhost:4301/posts?_limit=8&_page=${currentPage}${filtersAuthor}&_sort=${sortBy}&_order=${order}${search}`)
+		const { data, headers } = await axios.get<Post[]>(
+			`http://localhost:4301/posts?_limit=12&_page=${currentPage}${filtersAuthor}&_sort=${sortBy}&_order=${order}${search}`)
 		const itemsCount = headers["x-total-count"];
 		return { data, itemsCount };
 	}
 )
 
-const initialState = {
+const initialState: PostSliceState = {
 	items: [],
-	status: ''
+	status: Status.LOADING,
 }
 
 const postsSlice = createSlice ({
-	name: 'posts',
+	name: "posts",
 	initialState,
 	reducers: {
-		setItems(state,action) {
+		setItems(state,action ) {
 			state.items = action.payload.data;
 		},
 		setItemsCount(state,action) {
@@ -29,27 +55,26 @@ const postsSlice = createSlice ({
 			state.itemsCount = action.payload.itemsCount;
 		},
 	},
-	extraReducers: {
-		// @ts-ignore
-		[fetchPosts.pending]:(state) => {
-			state.status = "Loading";
+	extraReducers: (builder) => {
+		builder.addCase(fetchPosts.pending, (state, action) => {
+			state.status = Status.LOADING;
 			state.items = [];
-		},
-		// @ts-ignore
-		[fetchPosts.fulfilled]:(state,action) => {
+		});
+		builder.addCase(fetchPosts.fulfilled, (state, action) => {
 			state.items = action.payload.data;
+			// @ts-ignore
 			state.itemsCount = action.payload.itemsCount;
-			state.status = "success";
-		},
-		// @ts-ignore
-		[fetchPosts.rejected]:(state) => {
-			state.status = "error";
+			state.status = Status.SUCCESS;
+		});
+		builder.addCase(fetchPosts.rejected, (state, action) => {
+			state.status = Status.ERROR;
 			state.items = [];
-		}
+		});
 	},
 })
-export const selectItemsPost = (state) => state.posts.items;
-export const selectStatusPosts = (state) => state.posts.status;
-export const selectItemsCount = (state) => state.posts.itemsCount;
-export const { setItems, setItemsCount } = postsSlice.actions;
+
+export const selectItemsPost = (state: RootState) => state.posts.items;
+export const selectStatusPosts = (state: RootState) => state.posts.status;
+// @ts-ignore
+export const selectItemsCount = (state: RootState) => state.posts.itemsCount;
 export default postsSlice.reducer;

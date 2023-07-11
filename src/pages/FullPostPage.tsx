@@ -2,7 +2,6 @@ import { useParams, useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import React from "react";
 import axios from "axios";
-import { Button } from "primereact/button";
 
 export const FullPostPage:React.FC = () => {
 	const { id } = useParams();
