@@ -1,5 +1,5 @@
 import React from "react";
-import { editUser, getallUsers } from "../store/api";
+import { editUser, getallUsers } from "../../store/EntitiesCRUDL";
 import { useNavigate, useParams } from "react-router-dom";
 
 import { InputMask } from "primereact/inputmask";

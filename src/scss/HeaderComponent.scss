@@ -56,12 +56,16 @@ header {
 		}
 	}
 	.p-menubar-end {
+		margin-left: 16px!important;
 		.flag {
 			width: 1.5rem;
 			height: auto;
 		}
 		.p-dropdown-label {
 		
+		}
+		.p-button {
+			padding: 0.65rem 1.25rem;
 		}
 	}
 }
