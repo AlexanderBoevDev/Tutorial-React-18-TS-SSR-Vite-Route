@@ -1,13 +1,13 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setSearchValue, setSelectedAuthor, setCurrentPage, selectFilter } from "../store/slice/FilterSlice";
-import { SearchLayout } from "../layouts/SearchLayout";
-import { UserFilterLayout } from "../layouts/UserFilterLayout";
-import { SortPostLayout } from "../layouts/SortPostLayout";
-import { PostItemGridLayout } from "../layouts/PostItemGridLayout";
-import { PaginationComponent } from "../components/PaginationComponent";
-import { fetchPosts, selectItemsCount, selectItemsPost, selectStatusPosts } from "../store/slice/PostsSlice";
-import "../scss/Posts.scss";
+import { setSearchValue, setSelectedAuthor, setCurrentPage, selectFilter } from "../../store/slice/FilterSlice";
+import { SearchLayout } from "../../layouts/SearchLayout";
+import { UserFilterLayout } from "../../layouts/UserFilterLayout";
+import { SortPostLayout } from "../../layouts/SortPostLayout";
+import { PostItemGridLayout } from "../../layouts/PostItemGridLayout";
+import { PaginationComponent } from "../../components/PaginationComponent";
+import { fetchPosts, selectItemsCount, selectItemsPost, selectStatusPosts } from "../../store/slice/PostsSlice";
+import "../../scss/Posts.scss";
 
 export const PostsPage:React.FC = () => {
   const dispatch = useDispatch();

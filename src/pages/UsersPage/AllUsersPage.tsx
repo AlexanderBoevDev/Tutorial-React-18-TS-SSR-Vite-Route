@@ -1,12 +1,12 @@
 import React from "react";
-import { deleteUser ,getallUsers } from "../store/api";
+import { deleteUser ,getallUsers } from "../../store/EntitiesCRUDL";
 import { Link } from "react-router-dom";
 
 import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
 import { Button } from "primereact/button";
 
-import "../scss/Users.scss"
+import "../../scss/Users.scss"
 
 export const AllUsersPage:React.FC = () => {
   const [user, setUser] = React.useState([]);
